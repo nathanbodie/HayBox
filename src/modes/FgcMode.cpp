@@ -19,7 +19,8 @@ FgcMode::FgcMode(socd::SocdType horizontal_socd, socd::SocdType vertical_socd) {
 }
 
 void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
-    // Directions
+    // Left hand top row
+    outputs.leftStickClick = inputs.l;
     outputs.dpadLeft = inputs.left;
     outputs.dpadRight = inputs.right;
     outputs.dpadDown = inputs.down;
@@ -34,7 +35,7 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.a = inputs.b;
     outputs.b = inputs.x;
     outputs.triggerRDigital = inputs.z;
-    outputs.triggerLDigital = inputs.up;
+    outputs.rightStickClick = inputs.up;
 
     // Right hand top row
     outputs.x = inputs.r;
@@ -42,10 +43,11 @@ void FgcMode::UpdateDigitalOutputs(InputState &inputs, OutputState &outputs) {
     outputs.buttonR = inputs.lightshield;
     outputs.buttonL = inputs.midshield;
 
-    // L3 and R3
-    outputs.leftStickClick = inputs.l;
-    outputs.rightStickClick =
-        inputs.c_right || inputs.c_up || inputs.a || inputs.c_down || inputs.c_left;
+    // Right hand thumb cluster
+    outputs.rightStickClick = inputs.c_right;
+    outputs.triggerLDigital = inputs.a;
+
+    // unbounded buttons: || inputs.c_up || inputs.a || inputs.c_down || inputs.c_left;
 }
 
 void FgcMode::UpdateAnalogOutputs(InputState &inputs, OutputState &outputs) {
